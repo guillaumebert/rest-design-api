@@ -112,8 +112,9 @@
       <HintPath>packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="NeotysCommonAPI">
-      <HintPath>..\..\neotys-rest-c-sharp-common\NeotysCommonAPI\bin\Release\NeotysCommonAPI.dll</HintPath>
+    <Reference Include="NeotysRestCommonAPI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\NeotysRestCommonAPI.1.0.0\lib\net40\NeotysRestCommonAPI.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Simple.OData.Client.Net40, Version=4.16.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Simple.OData.Client.4.16.0\lib\net40\Simple.OData.Client.Net40.dll</HintPath>
