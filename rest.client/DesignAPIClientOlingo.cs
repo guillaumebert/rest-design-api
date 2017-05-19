@@ -461,7 +461,7 @@ namespace Neotys.DesignAPI.Client
             properties[DesignApiUtils.API_KEY] = apiKey;
             try
             {
-                CreateEntity(DesignApiUtils.SAVE_PROJECT, properties);
+                CreateEntity(DesignApiUtils.EXIT, properties);
             }
             catch (Microsoft.OData.Core.ODataException oDataException)
             {
