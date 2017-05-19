@@ -91,6 +91,9 @@ namespace Neotys.DesignAPI.Utils
         // Close Project
         public const string CLOSE_PROJECT = "CloseProject";
 
+        // Exit NeoLoad
+        public const string EXIT = "Exit";
+
         public static IDictionary<string, object> getStartRecordingProperties(StartRecordingParams startRecordingParams)
         {
             IDictionary<string, object> properties = new Dictionary<string, object>();

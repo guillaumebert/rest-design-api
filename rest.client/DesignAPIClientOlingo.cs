@@ -445,13 +445,37 @@ namespace Neotys.DesignAPI.Client
 			}
 		}
 
-		/// <summary>
-		/// Pause the recording. </summary>
+        /// <summary>
+		/// Close NeoLoad.</summary>
 		/// <exception cref="GeneralSecurityException"> </exception>
 		/// <exception cref="IOException"> </exception>
 		/// <exception cref="URISyntaxException"> </exception>
 		/// <exception cref="NeotysAPIException"> </exception>
-		public void PauseRecording()
+		public void Exit()
+        {
+            if (!Enabled)
+            {
+                return;
+            }
+            IDictionary<string, object> properties = new Dictionary<string, object>();
+            properties[DesignApiUtils.API_KEY] = apiKey;
+            try
+            {
+                CreateEntity(DesignApiUtils.SAVE_PROJECT, properties);
+            }
+            catch (Microsoft.OData.Core.ODataException oDataException)
+            {
+                throw new NeotysAPIException(oDataException);
+            }
+        }
+
+        /// <summary>
+        /// Pause the recording. </summary>
+        /// <exception cref="GeneralSecurityException"> </exception>
+        /// <exception cref="IOException"> </exception>
+        /// <exception cref="URISyntaxException"> </exception>
+        /// <exception cref="NeotysAPIException"> </exception>
+        public void PauseRecording()
 		{
 			if(!Enabled)
 			{

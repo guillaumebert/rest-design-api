@@ -144,13 +144,21 @@ namespace Neotys.DesignAPI.Client
 		/// <exception cref="NeotysAPIException"> </exception>
 		void CloseProject(CloseProjectParams closeProjectParams);
 
-		/// <summary>
-		/// Pause the recording. </summary>
+        /// <summary>
+		/// Close NeoLoad. Projects need to be closed first. </summary>
 		/// <exception cref="GeneralSecurityException"> </exception>
 		/// <exception cref="IOException"> </exception>
 		/// <exception cref="URISyntaxException"> </exception>
 		/// <exception cref="NeotysAPIException"> </exception>
-		void PauseRecording();
+		void Exit();
+
+        /// <summary>
+        /// Pause the recording. </summary>
+        /// <exception cref="GeneralSecurityException"> </exception>
+        /// <exception cref="IOException"> </exception>
+        /// <exception cref="URISyntaxException"> </exception>
+        /// <exception cref="NeotysAPIException"> </exception>
+        void PauseRecording();
 
 		/// <summary>
 		/// Resume the recording. </summary>
