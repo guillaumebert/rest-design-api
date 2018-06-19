@@ -54,6 +54,7 @@
     <Compile Include="model\SetScreenshotParams.cs" />
     <Compile Include="model\SetBaseContainersParams.cs" />
     <Compile Include="model\RecorderSettings.cs" />
+    <Compile Include="model\StartRecordingInfo.cs" />
     <Compile Include="model\Status.cs" />
     <Compile Include="model\SetContainerParams.cs" />
     <Compile Include="model\UpdateUserPathParamsBuilder.cs" />
@@ -113,13 +114,14 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="NeotysRestCommonAPI, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\NeotysRestCommonAPI.1.0.0\lib\net40\NeotysRestCommonAPI.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\rest-common-api-github\bin\Release\NeotysRestCommonAPI.dll</HintPath>
     </Reference>
     <Reference Include="Simple.OData.Client.Net40, Version=4.16.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Simple.OData.Client.4.16.0\lib\net40\Simple.OData.Client.Net40.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO, Version=2.6.9.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.Bcl.1.1.9\lib\net40\System.IO.dll</HintPath>

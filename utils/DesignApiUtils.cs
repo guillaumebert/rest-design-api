@@ -18,6 +18,9 @@ namespace Neotys.DesignAPI.Utils
         public const string PROTOCOL_HTTP2 = "ProtocolHTTP2";
         public const string PROTOCOL_ADOBE_RTMP = "ProtocolAdobeRTMP";
         public const string USER_AGENT = "UserAgent";
+        public const string PROTOCOL_SAP_GUI = "ProtocolSAPGUI";
+        public const string SAP_SESSION_ID = "SAPSessionID";
+        public const string SAP_CONNECTION_STRING = "SAPConnectionString";
 
         // StopRecording
         public const string STOP_RECORDING = "StopRecording";
@@ -103,6 +106,9 @@ namespace Neotys.DesignAPI.Utils
             properties[PROTOCOL_HTTP2] = startRecordingParams.Http2Protocol;
             properties[PROTOCOL_ADOBE_RTMP] = startRecordingParams.AdobeRTMPProtocol;
             properties[USER_AGENT] = startRecordingParams.UserAgent;
+            properties[PROTOCOL_SAP_GUI] = startRecordingParams.SapGuiProtocol;
+            properties[SAP_CONNECTION_STRING] = startRecordingParams.SapConnectionString;
+            properties[SAP_SESSION_ID] = startRecordingParams.SapSessionId;
             return properties;
         }
 
@@ -263,6 +269,16 @@ namespace Neotys.DesignAPI.Utils
             properties[FORCE_STOP] = closeProjectParams.ForceStop;
             properties[SAVE] = closeProjectParams.Save;
             return properties;
+        }
+
+        public static StartRecordingInfo getStartRecordingInfo(IDictionary<string, object> properties)
+        {
+            Object objectSapSessionId = properties[SAP_SESSION_ID];
+            if (!(objectSapSessionId is String))
+            {
+                return new StartRecordingInfo();
+            }
+            return new StartRecordingInfo(objectSapSessionId as String);
         }
 
     }

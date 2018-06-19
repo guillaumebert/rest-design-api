@@ -54,17 +54,19 @@ namespace Neotys.DesignAPI.Client
         /// <exception cref="IOException"> </exception>
         /// <exception cref="URISyntaxException"> </exception>
         /// <exception cref="NeotysAPIException"> </exception>
-        public void StartRecording(StartRecordingParams startRecordingParams)
+        /// <returns></returns>
+        public StartRecordingInfo StartRecording(StartRecordingParams startRecordingParams)
         {
             if (!Enabled)
             {
-                return;
+                return new StartRecordingInfo();
             }
             IDictionary<string, object> properties = DesignApiUtils.getStartRecordingProperties(startRecordingParams);
 			properties[DesignApiUtils.API_KEY] = apiKey;
             try
             {
-                CreateEntity(DesignApiUtils.START_RECORDING, properties);
+                ODataEntry entity = ReadEntity(DesignApiUtils.START_RECORDING, properties);
+                return DesignApiUtils.getStartRecordingInfo(entity.AsDictionary());
             }
             catch (Microsoft.OData.Core.ODataException oDataException)
             {

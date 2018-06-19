@@ -18,7 +18,10 @@ namespace Neotys.DesignAPI.Model
         public bool WebSocketProtocol { get; set; }
         public bool Http2Protocol { get; set; }
         public bool AdobeRTMPProtocol { get; set; }
+        public bool SapGuiProtocol { get; set; }
         public string UserAgent { get; set; }
+        public string SapSessionId { get; set; }
+        public string SapConnectionString { get; set; }
 
         public StartRecordingParamsBuilder()
         {
@@ -27,7 +30,10 @@ namespace Neotys.DesignAPI.Model
             this.WebSocketProtocol = true;
             this.Http2Protocol = true;
             this.AdobeRTMPProtocol = false;
+            this.SapGuiProtocol = false;
             this.UserAgent = "";
+            this.SapSessionId = null;
+            this.SapConnectionString = null;
         }
 
         public StartRecordingParamsBuilder virtualUser(string virtualUser)
@@ -60,9 +66,43 @@ namespace Neotys.DesignAPI.Model
             return this;
         }
 
+        /// <summary>
+        /// Allows to start a SAP GUI recording. Use sapSessionId to attach to an existing SAP session or sapConnectionString to create a new session.
+        /// </summary>
+        /// <param name="isSapGuiProtocol"></param>
+        /// <returns></returns>
+        public StartRecordingParamsBuilder isSapGuiProtocol(bool isSapGuiProtocol)
+        {
+            this.SapGuiProtocol = isSapGuiProtocol;
+            return this;
+        }
+
+
         public StartRecordingParamsBuilder userAgent(string userAgent)
         {
             this.UserAgent = userAgent;
+            return this;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sapSessionId">the name of the SAP session ID to attach.</param>
+        /// <returns></returns>
+        public StartRecordingParamsBuilder sapSessionId(string sapSessionId)
+        {
+            this.SapSessionId = sapSessionId;
+            return this;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sapConnectionString">the SAP connection String describing the server to create a new session.</param>
+        /// <returns></returns>
+        public StartRecordingParamsBuilder sapConnectionString(string sapConnectionString)
+        {
+            this.SapConnectionString = sapConnectionString;
             return this;
         }
 

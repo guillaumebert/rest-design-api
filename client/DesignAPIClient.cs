@@ -21,7 +21,8 @@ namespace Neotys.DesignAPI.Client
         /// <exception cref="IOException"> </exception>
         /// <exception cref="URISyntaxException"> </exception>
         /// <exception cref="NeotysAPIException"> </exception>
-        void StartRecording(StartRecordingParams startRecordingParams);
+        /// <returns></returns>
+        StartRecordingInfo StartRecording(StartRecordingParams startRecordingParams);
 
         /// <summary>
         /// Stop a recording. </summary>

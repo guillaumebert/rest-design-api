@@ -20,7 +20,10 @@ namespace Neotys.DesignAPI.Model
         private readonly bool webSocketProtocol;
         private readonly bool http2Protocol;
         private readonly bool adobeRTMPProtocol;
+        private readonly bool sapGuiProtocol;
         private readonly string userAgent;
+        private readonly string sapSessionId;
+        private readonly string sapConnectionString;
 
         internal StartRecordingParams(StartRecordingParamsBuilder startRecordingBuilder)
         {
@@ -29,7 +32,10 @@ namespace Neotys.DesignAPI.Model
             this.webSocketProtocol = startRecordingBuilder.WebSocketProtocol;
             this.http2Protocol = startRecordingBuilder.Http2Protocol;
             this.adobeRTMPProtocol = startRecordingBuilder.AdobeRTMPProtocol;
+            this.sapGuiProtocol = startRecordingBuilder.SapGuiProtocol;
             this.userAgent = startRecordingBuilder.UserAgent;
+            this.sapSessionId = startRecordingBuilder.SapSessionId;
+            this.sapConnectionString = startRecordingBuilder.SapConnectionString;
         }
 
         public virtual string VirtualUser
@@ -72,11 +78,35 @@ namespace Neotys.DesignAPI.Model
             }
         }
 
+        public virtual bool SapGuiProtocol
+        {
+            get
+            {
+                return sapGuiProtocol;
+            }
+        }
+
         public virtual string UserAgent
         {
             get
             {
                 return userAgent;
+            }
+        }
+
+        public virtual string SapSessionId
+        {
+            get
+            {
+                return sapSessionId;
+            }
+        }
+
+        public virtual string SapConnectionString
+        {
+            get
+            {
+                return sapConnectionString;
             }
         }
 
@@ -98,7 +128,10 @@ namespace Neotys.DesignAPI.Model
                 .With(m => m.http2Protocol)
                 .With(m => m.webSocketProtocol)
                 .With(m => m.adobeRTMPProtocol)
+                .With(m => m.sapGuiProtocol)
                 .With(m => m.userAgent)
+                .With(m => m.sapSessionId)
+                .With(m => m.sapConnectionString)
                 .HashCode;
         }
 
@@ -115,7 +148,10 @@ namespace Neotys.DesignAPI.Model
                 .With(m => m.http2Protocol)
                 .With(m => m.webSocketProtocol)
                 .With(m => m.adobeRTMPProtocol)
+                .With(m => m.sapGuiProtocol)
                 .With(m => m.userAgent)
+                .With(m => m.sapSessionId)
+                .With(m => m.sapConnectionString)
                 .Equals();
         }
     }
