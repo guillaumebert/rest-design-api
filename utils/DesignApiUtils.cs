@@ -106,9 +106,13 @@ namespace Neotys.DesignAPI.Utils
             properties[PROTOCOL_HTTP2] = startRecordingParams.Http2Protocol;
             properties[PROTOCOL_ADOBE_RTMP] = startRecordingParams.AdobeRTMPProtocol;
             properties[USER_AGENT] = startRecordingParams.UserAgent;
-            properties[PROTOCOL_SAP_GUI] = startRecordingParams.SapGuiProtocol;
-            properties[SAP_CONNECTION_STRING] = startRecordingParams.SapConnectionString;
-            properties[SAP_SESSION_ID] = startRecordingParams.SapSessionId;
+            // do not set SapGuiProtocol in properties, this allows to be compatiable with old NeoLoad.
+            if (startRecordingParams.SapGuiProtocol)
+            {
+                properties[PROTOCOL_SAP_GUI] = startRecordingParams.SapGuiProtocol;
+                properties[SAP_CONNECTION_STRING] = startRecordingParams.SapConnectionString;
+                properties[SAP_SESSION_ID] = startRecordingParams.SapSessionId;
+            }
             return properties;
         }
 
@@ -273,7 +277,7 @@ namespace Neotys.DesignAPI.Utils
 
         public static StartRecordingInfo getStartRecordingInfo(IDictionary<string, object> properties)
         {
-            Object objectSapSessionId = properties[SAP_SESSION_ID];
+            Object objectSapSessionId = properties.ContainsKey(SAP_SESSION_ID) ? properties[SAP_SESSION_ID] : null;
             if (!(objectSapSessionId is String))
             {
                 return new StartRecordingInfo();
