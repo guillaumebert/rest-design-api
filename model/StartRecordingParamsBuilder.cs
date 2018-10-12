@@ -31,7 +31,7 @@ namespace Neotys.DesignAPI.Model
             this.Http2Protocol = true;
             this.AdobeRTMPProtocol = false;
             this.SapGuiProtocol = false;
-            this.UserAgent = "";
+            this.UserAgent = null;
             this.SapSessionId = null;
             this.SapConnectionString = null;
         }
