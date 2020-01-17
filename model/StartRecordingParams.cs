@@ -24,6 +24,7 @@ namespace Neotys.DesignAPI.Model
         private readonly string userAgent;
         private readonly string sapSessionId;
         private readonly string sapConnectionString;
+        private readonly bool? createTransactionBySapTCode;
 
         internal StartRecordingParams(StartRecordingParamsBuilder startRecordingBuilder)
         {
@@ -36,6 +37,7 @@ namespace Neotys.DesignAPI.Model
             this.userAgent = startRecordingBuilder.UserAgent;
             this.sapSessionId = startRecordingBuilder.SapSessionId;
             this.sapConnectionString = startRecordingBuilder.SapConnectionString;
+            this.createTransactionBySapTCode = startRecordingBuilder.CreateTransactionBySapTCode;
         }
 
         public virtual string VirtualUser
@@ -110,6 +112,14 @@ namespace Neotys.DesignAPI.Model
             }
         }
 
+        public virtual bool? CreateTransactionBySapTCode
+        {
+            get
+            {
+                return createTransactionBySapTCode;
+            }
+        }
+
         public override string ToString()
         {
             return new ToStringBuilder<StartRecordingParams>(this).ReflectionToString(this);
@@ -132,6 +142,7 @@ namespace Neotys.DesignAPI.Model
                 .With(m => m.userAgent)
                 .With(m => m.sapSessionId)
                 .With(m => m.sapConnectionString)
+                .With(m => m.createTransactionBySapTCode)
                 .HashCode;
         }
 
@@ -152,6 +163,7 @@ namespace Neotys.DesignAPI.Model
                 .With(m => m.userAgent)
                 .With(m => m.sapSessionId)
                 .With(m => m.sapConnectionString)
+                .With(m => m.createTransactionBySapTCode)
                 .Equals();
         }
     }

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NeotysRestDesignAPI", "NeotysRestDesignAPI.csproj", "{B532B87E-82A6-402E-874F-DF3F21D656AD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B532B87E-82A6-402E-874F-DF3F21D656AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B532B87E-82A6-402E-874F-DF3F21D656AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B532B87E-82A6-402E-874F-DF3F21D656AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B532B87E-82A6-402E-874F-DF3F21D656AD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {94EDCCE1-9836-437A-8ADB-4C7E4C49927B}
+	EndGlobalSection
+EndGlobal

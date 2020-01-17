@@ -21,6 +21,7 @@ namespace Neotys.DesignAPI.Utils
         public const string PROTOCOL_SAP_GUI = "ProtocolSAPGUI";
         public const string SAP_SESSION_ID = "SAPSessionID";
         public const string SAP_CONNECTION_STRING = "SAPConnectionString";
+        public const string CREATE_TRANSACTION_BY_SAP_TCODE = "CreateTransactionBySapTCode";
 
         // StopRecording
         public const string STOP_RECORDING = "StopRecording";
@@ -112,6 +113,8 @@ namespace Neotys.DesignAPI.Utils
                 properties[PROTOCOL_SAP_GUI] = startRecordingParams.SapGuiProtocol;
                 properties[SAP_CONNECTION_STRING] = startRecordingParams.SapConnectionString;
                 properties[SAP_SESSION_ID] = startRecordingParams.SapSessionId;
+                // FIXME handle retro compatibility with old neoload
+                properties[CREATE_TRANSACTION_BY_SAP_TCODE] = startRecordingParams.CreateTransactionBySapTCode;
             }
             return properties;
         }
