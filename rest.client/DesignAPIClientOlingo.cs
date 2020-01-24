@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Simple.OData.Client;
+using System.Linq;
 
 /*
  * Copyright (c) 2016, Neotys
@@ -13,6 +14,7 @@ namespace Neotys.DesignAPI.Client
     using CommonAPI.Client;
     using Utils;
     using NeotysAPIException = CommonAPI.Error.NeotysAPIException;
+    using Microsoft.Data.Edm;
 
     /// <summary>
     /// An implementation of a Design API Client, based on Apache Olingo framework.
@@ -61,8 +63,17 @@ namespace Neotys.DesignAPI.Client
             {
                 return new StartRecordingInfo();
             }
+
+            IEdmEntityType edmSchemaElement = Edm.SchemaElements.Where(schema => schema.Name == DesignApiUtils.START_RECORDING).First() as IEdmEntityType;
+            bool isPresentInNeoloadSchemaCreateTransactionBySapTCode = edmSchemaElement.DeclaredProperties.Where(prop => prop.Name == DesignApiUtils.CREATE_TRANSACTION_BY_SAP_TCODE).Count() > 0;
+
             IDictionary<string, object> properties = DesignApiUtils.getStartRecordingProperties(startRecordingParams);
-			properties[DesignApiUtils.API_KEY] = apiKey;
+            if (!isPresentInNeoloadSchemaCreateTransactionBySapTCode)
+            {
+                // Remove this property to keep compatibility with Neoload older than 7.3
+                properties.Remove(DesignApiUtils.CREATE_TRANSACTION_BY_SAP_TCODE);
+            }
+            properties[DesignApiUtils.API_KEY] = apiKey;
             try
             {
                 ODataEntry entity = ReadEntity(DesignApiUtils.START_RECORDING, properties);

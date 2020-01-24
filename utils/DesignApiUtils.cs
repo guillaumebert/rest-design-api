@@ -113,7 +113,6 @@ namespace Neotys.DesignAPI.Utils
                 properties[PROTOCOL_SAP_GUI] = startRecordingParams.SapGuiProtocol;
                 properties[SAP_CONNECTION_STRING] = startRecordingParams.SapConnectionString;
                 properties[SAP_SESSION_ID] = startRecordingParams.SapSessionId;
-                // FIXME handle retro compatibility with old neoload
                 properties[CREATE_TRANSACTION_BY_SAP_TCODE] = startRecordingParams.CreateTransactionBySapTCode;
             }
             return properties;
