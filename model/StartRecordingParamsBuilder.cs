@@ -22,6 +22,7 @@ namespace Neotys.DesignAPI.Model
         public string UserAgent { get; set; }
         public string SapSessionId { get; set; }
         public string SapConnectionString { get; set; }
+        public bool? CreateTransactionBySapTCode { get; set; }
 
         public StartRecordingParamsBuilder()
         {
@@ -34,6 +35,7 @@ namespace Neotys.DesignAPI.Model
             this.UserAgent = null;
             this.SapSessionId = null;
             this.SapConnectionString = null;
+            this.CreateTransactionBySapTCode = null;
         }
 
         public StartRecordingParamsBuilder virtualUser(string virtualUser)
@@ -103,6 +105,12 @@ namespace Neotys.DesignAPI.Model
         public StartRecordingParamsBuilder sapConnectionString(string sapConnectionString)
         {
             this.SapConnectionString = sapConnectionString;
+            return this;
+        }
+
+        public StartRecordingParamsBuilder isCreateTransactionBySapTCode(bool? createTransactionBySapTCode)
+        {
+            this.CreateTransactionBySapTCode = createTransactionBySapTCode;
             return this;
         }
 

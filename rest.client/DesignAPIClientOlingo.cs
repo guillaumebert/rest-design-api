@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Simple.OData.Client;
+using System.Linq;
 
 /*
  * Copyright (c) 2016, Neotys
@@ -13,6 +13,9 @@ namespace Neotys.DesignAPI.Client
     using CommonAPI.Client;
     using Utils;
     using NeotysAPIException = CommonAPI.Error.NeotysAPIException;
+    using Microsoft.Data.Edm;
+    using Microsoft.OData;
+    using Simple.OData.Client;
 
     /// <summary>
     /// An implementation of a Design API Client, based on Apache Olingo framework.
@@ -61,14 +64,23 @@ namespace Neotys.DesignAPI.Client
             {
                 return new StartRecordingInfo();
             }
+
+            IEdmEntityType edmSchemaElement = Edm.SchemaElements.Where(schema => schema.Name == DesignApiUtils.START_RECORDING).First() as IEdmEntityType;
+            bool isPresentInNeoloadSchemaCreateTransactionBySapTCode = edmSchemaElement.DeclaredProperties.Where(prop => prop.Name == DesignApiUtils.CREATE_TRANSACTION_BY_SAP_TCODE).Count() > 0;
+
             IDictionary<string, object> properties = DesignApiUtils.getStartRecordingProperties(startRecordingParams);
-			properties[DesignApiUtils.API_KEY] = apiKey;
+            if (!isPresentInNeoloadSchemaCreateTransactionBySapTCode)
+            {
+                // Remove this property to keep compatibility with Neoload older than 7.3
+                properties.Remove(DesignApiUtils.CREATE_TRANSACTION_BY_SAP_TCODE);
+            }
+            properties[DesignApiUtils.API_KEY] = apiKey;
             try
             {
                 ODataEntry entity = ReadEntity(DesignApiUtils.START_RECORDING, properties);
                 return DesignApiUtils.getStartRecordingInfo(entity.AsDictionary());
             }
-            catch (Microsoft.OData.Core.ODataException oDataException)
+            catch (ODataException oDataException)
             {
                 throw new NeotysAPIException(oDataException);
             }
@@ -104,7 +116,7 @@ namespace Neotys.DesignAPI.Client
 			catch (System.AggregateException aggregateException) {
 				throw new NeotysAPIException(aggregateException.InnerException);
 			}
-            catch (Microsoft.OData.Core.ODataException oDataException)
+            catch (ODataException oDataException)
             {
                 throw new NeotysAPIException(oDataException);
             }
@@ -137,7 +149,7 @@ namespace Neotys.DesignAPI.Client
             {
                 CreateEntity(DesignApiUtils.SET_CONTAINER, properties);
             }
-            catch (Microsoft.OData.Core.ODataException oDataException)
+            catch (ODataException oDataException)
             {
                 throw new NeotysAPIException(oDataException);
             }
@@ -163,7 +175,7 @@ namespace Neotys.DesignAPI.Client
             {
                 CreateEntity(DesignApiUtils.SET_SCREENSHOT, properties);
             }
-            catch (Microsoft.OData.Core.ODataException oDataException)
+            catch (ODataException oDataException)
             {
                 throw new NeotysAPIException(oDataException);
             }
@@ -189,7 +201,7 @@ namespace Neotys.DesignAPI.Client
             {
                 CreateEntity(DesignApiUtils.SET_BASE_CONTAINER, properties);
             }
-            catch (Microsoft.OData.Core.ODataException oDataException)
+            catch (ODataException oDataException)
             {
                 throw new NeotysAPIException(oDataException);
             }
@@ -214,7 +226,7 @@ namespace Neotys.DesignAPI.Client
                 ODataEntry entity = ReadEntity(DesignApiUtils.GET_RECORDER_SETTINGS, properties);
                 return DesignApiUtils.getGetRecorderSettings(entity.AsDictionary());
             }
-            catch (Microsoft.OData.Core.ODataException oDataException)
+            catch (ODataException oDataException)
             {
                 throw new NeotysAPIException(oDataException);
             }
@@ -239,7 +251,7 @@ namespace Neotys.DesignAPI.Client
                 ODataEntry entity = ReadEntity(DesignApiUtils.GET_RECORDING_STATUS, properties);
                 return DesignApiUtils.getRecordingStatus(entity.AsDictionary());
             }
-            catch (Microsoft.OData.Core.ODataException oDataException)
+            catch (ODataException oDataException)
             {
                 throw new NeotysAPIException(oDataException);
             }
@@ -264,7 +276,7 @@ namespace Neotys.DesignAPI.Client
 				ODataEntry entity = ReadEntity(DesignApiUtils.GET_STATUS, properties);
 				return DesignApiUtils.getStatus(entity.AsDictionary());
 			}
-			catch (Microsoft.OData.Core.ODataException oDataException)
+			catch (ODataException oDataException)
 			{
 				throw new NeotysAPIException(oDataException);
 			}
@@ -290,7 +302,7 @@ namespace Neotys.DesignAPI.Client
 				ODataEntry entity = ReadEntity(DesignApiUtils.CONTAINS_USER_PATH, properties);
 				return DesignApiUtils.getContains(entity.AsDictionary());
 			}
-			catch (Microsoft.OData.Core.ODataException oDataException)
+			catch (ODataException oDataException)
 			{
 				throw new NeotysAPIException(oDataException);
 			}
@@ -316,7 +328,7 @@ namespace Neotys.DesignAPI.Client
 				ODataEntry entity = ReadEntity(DesignApiUtils.IS_PROJECT_OPEN, properties);
 				return DesignApiUtils.getOpen(entity.AsDictionary());
 			}
-			catch (Microsoft.OData.Core.ODataException oDataException) 
+			catch (ODataException oDataException) 
 			{
 				throw new NeotysAPIException(oDataException);
 			}
@@ -342,7 +354,7 @@ namespace Neotys.DesignAPI.Client
 			{
 				CreateEntity(DesignApiUtils.OPEN_PROJECT, properties);
 			}
-			catch (Microsoft.OData.Core.ODataException oDataException) 
+			catch (ODataException oDataException) 
 			{
 				throw new NeotysAPIException(oDataException);
 			}
@@ -367,7 +379,7 @@ namespace Neotys.DesignAPI.Client
 			{
 				CreateEntity(DesignApiUtils.CREATE_PROJECT, properties);
 			}
-			catch (Microsoft.OData.Core.ODataException oDataException) 
+			catch (ODataException oDataException) 
 			{
 				throw new NeotysAPIException(oDataException);
 			}
@@ -391,7 +403,7 @@ namespace Neotys.DesignAPI.Client
 			{
 				CreateEntity(DesignApiUtils.SAVE_PROJECT, properties);
 			}
-			catch (Microsoft.OData.Core.ODataException oDataException) 
+			catch (ODataException oDataException) 
 			{
 				throw new NeotysAPIException(oDataException);
 			}
@@ -416,7 +428,7 @@ namespace Neotys.DesignAPI.Client
 			{
 				CreateEntity(DesignApiUtils.SAVE_AS_PROJECT, properties);
 			}
-			catch (Microsoft.OData.Core.ODataException oDataException) 
+			catch (ODataException oDataException) 
 			{
 				throw new NeotysAPIException(oDataException);
 			}
@@ -441,7 +453,7 @@ namespace Neotys.DesignAPI.Client
 			{
 				CreateEntity(DesignApiUtils.CLOSE_PROJECT, properties);
 			}
-			catch (Microsoft.OData.Core.ODataException oDataException) 
+			catch (ODataException oDataException) 
 			{
 				throw new NeotysAPIException(oDataException);
 			}
@@ -465,7 +477,7 @@ namespace Neotys.DesignAPI.Client
             {
                 CreateEntity(DesignApiUtils.EXIT, properties);
             }
-            catch (Microsoft.OData.Core.ODataException oDataException)
+            catch (ODataException oDataException)
             {
                 throw new NeotysAPIException(oDataException);
             }
@@ -489,7 +501,7 @@ namespace Neotys.DesignAPI.Client
 			{
 				CreateEntity(DesignApiUtils.PAUSE_RECORDING, properties);
 			}			
-			catch (Microsoft.OData.Core.ODataException oDataException) 
+			catch (ODataException oDataException) 
 			{
 				throw new NeotysAPIException(oDataException);
 			}
@@ -513,7 +525,7 @@ namespace Neotys.DesignAPI.Client
 			{
 				CreateEntity(DesignApiUtils.RESUME_RECORDING, properties);
 			}
-			catch (Microsoft.OData.Core.ODataException oDataException) 
+			catch (ODataException oDataException) 
 			{
 				throw new NeotysAPIException(oDataException);
 			}
