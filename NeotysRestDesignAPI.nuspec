@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>NeotysRestDesignAPI</id>
+    <version>1.0.9</version>
+    <title>Neotys Rest Design API</title>
+    <authors>Neotys</authors>
+    <owners>Neotys</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>https://www.neotys.fr/documents/legal/bsd-neotys.txt</licenseUrl>
+    <projectUrl>https://github.com/neotys-rd/rest-design-api</projectUrl>
+    <iconUrl>https://www.neotys.com/favicon-96x96.png</iconUrl>
+    <description>Neotys rest design api</description>
+    <releaseNotes>Update to .NET Framework 4.7.1 and Simple.Odata.Client library</releaseNotes>
+    <copyright>Copyright 2018</copyright>
+    <tags>NeoLoad Rest Design API SAP</tags>
+    <dependencies>
+      <dependency id="Microsoft.Bcl" version="1.1.10" />
+      <dependency id="Microsoft.Bcl.Build" version="1.0.21" />
+      <dependency id="Microsoft.Data.OData" version="5.8.4" />
+      <dependency id="NeotysRestCommonAPI" version="1.0.4" />
+    </dependencies>
+  </metadata>
+</package>
